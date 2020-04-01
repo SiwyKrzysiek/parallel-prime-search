@@ -2,10 +2,15 @@
 #include <omp.h>
 #include <stdbool.h>
 #include <string.h>
+#include "libraries/c-vector/cvector.h"
+
+#define CVECTOR_LOGARITHMIC_GROWTH
 
 int main()
 {
     const int n = 30;
+    // For storing found primes
+    cvector_vector_type(int) primes = NULL;
 
     // Number is potenitial prime if it is true
     // Numer is index+1
@@ -33,6 +38,7 @@ int main()
                         if (sieve[startingPoint]) // It's prime
                         {
                             myPrime = ++startingPoint;
+                            cvector_push_back(primes, myPrime);
 #ifdef DEBUG
                             int id = omp_get_thread_num();
                             printf("Thead %d found prime: %d\n", id, myPrime);
@@ -60,14 +66,11 @@ int main()
 
     // Print found primes
     printf("\nFound primes:\n");
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < cvector_size(primes); i++)
     {
-        if (sieve[i])
-        {
-            printf("%d\n", i+1);
-        }
+        printf("%d\n", primes[i]);
     }
 
-
+    cvector_free(primes);
     return 0;
 }
