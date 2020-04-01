@@ -6,14 +6,19 @@
 #include "libraries/c-vector/cvector.h"
 
 #define CVECTOR_LOGARITHMIC_GROWTH
+#define DEFAULT_N 100
 
 // Find all primes from 1 to lastNumber inclusive
 // Returns cvector with found primes
 int* eratosthenesSieve(const int lastNumber);
 
-int main()
+int main(int argc, char **argv)
 {
-    const int n = 10000000;
+    if (argc <= 1)
+    {
+        printf("Range boundary not provided\nUsing default value: %d\n", DEFAULT_N);
+    }
+    const int n = argc >= 2 ? atoi(argv[1]) : DEFAULT_N;
 
     // Firstly find all primes in subset [1, ⌊√n⌋]
     const int subsetSize = sqrt(n);
