@@ -6,10 +6,28 @@
 
 #define CVECTOR_LOGARITHMIC_GROWTH
 
+// Find all primes from 1 to lastNumber inclusive
+// Returns cvector with found primes
+int* eratosthenesSieve(const int lastNumber);
+
 int main()
 {
-    const int n = 30;
-    // For storing found primes
+    int* primes = eratosthenesSieve(30);
+
+    // Print found primes
+    printf("\nFound primes:\n");
+    for (int i = 0; i < cvector_size(primes); i++)
+    {
+        printf("%d\n", primes[i]);
+    }
+
+    cvector_free(primes);
+    return 0;
+}
+
+int* eratosthenesSieve(const int lastNumber)
+{
+    const int n = lastNumber;
     cvector_vector_type(int) primes = NULL;
 
     // Number is potenitial prime if it is true
@@ -61,16 +79,7 @@ int main()
             }
 
         }
-
     }
 
-    // Print found primes
-    printf("\nFound primes:\n");
-    for (int i = 0; i < cvector_size(primes); i++)
-    {
-        printf("%d\n", primes[i]);
-    }
-
-    cvector_free(primes);
-    return 0;
+    return primes;
 }
