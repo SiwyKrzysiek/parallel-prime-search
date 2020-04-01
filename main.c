@@ -2,6 +2,7 @@
 #include <omp.h>
 #include <stdbool.h>
 #include <string.h>
+#include <math.h>
 #include "libraries/c-vector/cvector.h"
 
 #define CVECTOR_LOGARITHMIC_GROWTH
@@ -12,14 +13,44 @@ int* eratosthenesSieve(const int lastNumber);
 
 int main()
 {
-    int* primes = eratosthenesSieve(30);
+    const int n = 10000000;
 
-    // Print found primes
-    printf("\nFound primes:\n");
+    // Firstly find all primes in subset [1, ⌊√n⌋]
+    const int subsetSize = sqrt(n);
+    // printf("Subset size: %d\n", subsetSize);
+    int* primes = eratosthenesSieve(subsetSize);
+    const int subsetPrimesCount = cvector_size(primes);
+
+    int subsetPrimes[subsetPrimesCount]; // Can't use vector because address will change. Maybe should not use it at all
+    memcpy(subsetPrimes, cvector_begin(primes), subsetPrimesCount * sizeof(*primes));
+
+    int potentialPrime = 0;
+    #pragma omp parallel for shared(subsetSize, primes, subsetPrimesCount) private(potentialPrime)
+    for (potentialPrime = subsetSize+1; potentialPrime <= n; potentialPrime++)
+    {
+        bool isPrime = true;
+        for (int i = 0; i < subsetPrimesCount; i++)
+        {
+            if (potentialPrime % subsetPrimes[i] == 0)
+            {
+                isPrime = false;
+                break;
+            }
+        }
+
+        if (isPrime)
+        {
+            #pragma omp critical
+            cvector_push_back(primes, potentialPrime);
+        }
+    }
+
+    // puts("Found primes:");
     for (int i = 0; i < cvector_size(primes); i++)
     {
         printf("%d\n", primes[i]);
     }
+
 
     cvector_free(primes);
     return 0;
@@ -48,7 +79,7 @@ int* eratosthenesSieve(const int lastNumber)
             #pragma omp critical
             {
                 #pragma omp flush
-                if (startingPoint < n) // Safty check
+                if (startingPoint < n) // Safety check
                 {
                     for (; startingPoint < n; startingPoint++)
                     {
@@ -57,8 +88,8 @@ int* eratosthenesSieve(const int lastNumber)
                             myPrime = ++startingPoint;
                             cvector_push_back(primes, myPrime);
 #ifdef DEBUG
-                            int id = omp_get_thread_num();
-                            printf("Thead %d found prime: %d\n", id, myPrime);
+                            // int id = omp_get_thread_num();
+                            // printf("Thread %d found prime: %d\n", id, myPrime);
 #endif
                             break;
                         }
