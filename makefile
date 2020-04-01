@@ -9,7 +9,7 @@ ifeq ($(UNAME), Darwin)
 else
 	SharedFlags+=-fopenmp
 endif
-DebugFlags=$(SharedFlags) -Wall -g3 -pedantic -D DEBUG
+DebugFlags=$(SharedFlags) -Wall -g3 -Wnewline-eof -D DEBUG
 ReleseFlags=$(SharedFlags) -Ofast -g0 -Wno-everything
 
 Objects=
