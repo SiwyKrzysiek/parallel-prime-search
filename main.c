@@ -43,14 +43,13 @@ int* eratosthenesSieve(const int lastNumber)
     {
         while (startingPoint < n)
         {
+            // Find first prime and take it
             int myPrime = 0;
-
             #pragma omp critical
             {
                 #pragma omp flush
                 if (startingPoint < n) // Safty check
                 {
-                    // Find first prime and take it
                     for (; startingPoint < n; startingPoint++)
                     {
                         if (sieve[startingPoint]) // It's prime
@@ -74,10 +73,7 @@ int* eratosthenesSieve(const int lastNumber)
 
             // Cross out multiples of selected prime
             for (int i = myPrime*2-1; i < n; i+=myPrime)
-            {
                 sieve[i] = false;
-            }
-
         }
     }
 
