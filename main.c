@@ -24,7 +24,8 @@ int main()
     int subsetPrimes[subsetPrimesCount]; // Can't use vector because address will change. Maybe should not use it at all
     memcpy(subsetPrimes, cvector_begin(primes), subsetPrimesCount * sizeof(*primes));
 
-    #pragma omp parallel for shared(subsetSize, primes, subsetPrimesCount)
+    #pragma omp parallel shared(subsetSize, primes, subsetPrimesCount, n)
+    #pragma omp for nowait
     for (int potentialPrime = subsetSize+1; potentialPrime <= n; potentialPrime++)
     {
         bool isPrime = true;
