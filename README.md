@@ -1,5 +1,7 @@
 # Równoległe wyszukiwanie liczb pierwszych
 
+<!-- Link do repozytorium: https://github.com/SiwyKrzysiek/parallel-prime-search -->
+
 Wykorzystanie standardu OpenMP w celu wydajnego poszukiwania wszystkich liczb pierwszych w danym zakresie.
 
 ## Spis treści
