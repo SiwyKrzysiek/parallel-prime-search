@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include <math.h>
+#include <sys/time.h>
 #include "libraries/c-vector/cvector.h"
 
 #define CVECTOR_LOGARITHMIC_GROWTH
@@ -21,6 +22,9 @@ int main(int argc, char **argv)
         printf("Range boundary not provided\nUsing default value: %d\n", DEFAULT_N);
     }
     const int n = argc >= 2 ? atoi(argv[1]) : DEFAULT_N;
+
+    struct timeval stop, start;
+    gettimeofday(&start, NULL);
 
     // Firstly find all primes in subset [1, ⌊√n⌋]
     const int subsetSize = sqrt(n);
@@ -65,6 +69,8 @@ int main(int argc, char **argv)
         fprintf(file, "%d\n", primes[i]);
     }
 
+    gettimeofday(&stop, NULL);
+    printf("Execution took %lu us\n", (stop.tv_sec - start.tv_sec) * 1000000 + stop.tv_usec - start.tv_usec);
 
     cvector_free(primes);
     return 0;
