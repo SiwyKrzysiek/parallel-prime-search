@@ -56,7 +56,7 @@ Gdzie _range\_boundary_ jest największą liczbą, która zostanie uwzględniona
 
 ## Sprawdzenie poprawności działania
 
-Do sprawdzenia poprawności wyników został napisany prosty skrypt `testPrimes.py`. Zakłada on, że wynik głównego programu został zapisany w pliku.
+Do sprawdzenia poprawności wyników został napisany prosty skrypt [testPrimes.py](testPrimes.py). Zakłada on, że wynik głównego programu został zapisany w pliku.
 
 ## Zadania
 
