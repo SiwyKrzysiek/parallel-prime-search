@@ -2,6 +2,19 @@
 
 Wykorzystanie standardu OpenMP w celu wydajnego poszukiwania wszystkich liczb pierwszych w danym zakresie.
 
+## Spis treści
+
+- [Równoległe wyszukiwanie liczb pierwszych](#równoległe-wyszukiwanie-liczb-pierwszych)
+  - [Spis treści](#spis-treści)
+  - [Działanie programu](#działanie-programu)
+    - [Równoległe sito Eratostenesa](#równoległe-sito-eratostenesa)
+    - [Równoległe sprawdzenie pierwszości kolejnych liczb](#równoległe-sprawdzenie-pierwszości-kolejnych-liczb)
+  - [Uruchomienie programu](#uruchomienie-programu)
+  - [Sprawdzenie poprawności działania](#sprawdzenie-poprawności-działania)
+  - [Zadania](#zadania)
+    - [Zadanie 1](#zadanie-1)
+  - [Przydatne materiały](#przydatne-materiały)
+
 ## Działanie programu
 
 Program stosuje podejście złożone z 2 etapów do wyznaczenia liczb pierwszych z przedziału [1…n].
@@ -36,6 +49,17 @@ Gdzie _range\_boundary_ jest największą liczbą, która zostanie uwzględniona
 ## Sprawdzenie poprawności działania
 
 Do sprawdzenia poprawności wyników został napisany prosty skrypt `testPrimes.py`. Zakłada on, że wynik głównego programu został zapisany w pliku.
+
+## Zadania
+
+Zadania do zrealizowania w celu porównania algorytmu równoległego z sekwencyjnym.
+
+### Zadanie 1
+
+Proszę zrówoleglić wykonanie programu z wykorzystaniem OpenMP (na początku zastanówcie się Państwo które sekcje programu można zrównoleglić, co powinno zostać wykonane sekwencyjnie, gdzie powinna zostać użyta sekcja krytyczna)
+
+Kod programu znajduje się w pliku [main.c](./main.c).
+Opis algorytmu oraz sekcji krytycznych znajduje się w akapicie [Działanie programu](#Działanie-programu).
 
 ## Przydatne materiały
 
