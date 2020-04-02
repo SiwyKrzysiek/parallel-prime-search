@@ -6,7 +6,9 @@
 #include "libraries/c-vector/cvector.h"
 
 #define CVECTOR_LOGARITHMIC_GROWTH
+
 #define DEFAULT_N 100
+#define OUTPUT_FILE_NAME "primes.txt"
 
 // Find all primes from 1 to lastNumber inclusive
 // Returns cvector with found primes
@@ -50,10 +52,17 @@ int main(int argc, char **argv)
         }
     }
 
-    // puts("Found primes:");
+    FILE* file;
+    if ((file = fopen(OUTPUT_FILE_NAME, "w")) == NULL)
+    {
+        fputs("Unable to open output file", stderr);
+        cvector_free(primes);
+        exit(EXIT_FAILURE);
+    }
+
     for (int i = 0; i < cvector_size(primes); i++)
     {
-        printf("%d\n", primes[i]);
+        fprintf(file, "%d\n", primes[i]);
     }
 
 
