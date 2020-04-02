@@ -94,3 +94,5 @@ Co ciekawe czas wykonania nie jest najkrótszy dla 8 wątków. Może to wynikać
 ## Przydatne materiały
 
 - [Jak kompilować programy z OpenMP na OS X](https://iscinumpy.gitlab.io/post/omp-on-high-sierra/)
+- [Prosta implementacja wektora](https://github.com/eteran/c-vector)
+- [Dokumentacja OpenMP](https://docs.microsoft.com/en-us/cpp/parallel/openmp/2-directives)
