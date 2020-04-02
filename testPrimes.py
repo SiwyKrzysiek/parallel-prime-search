@@ -4,6 +4,7 @@ n = 10000000
 file_name = 'primes.txt'
 
 actual_primes = set(sympy.sieve.primerange(1, n+1))
+print(f'There should be {len(actual_primes)} primes total')
 
 with open(file_name, 'r') as file:
     my_primes = {int(line) for line in file.readlines()}
