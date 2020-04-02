@@ -13,6 +13,9 @@ Wykorzystanie standardu OpenMP w celu wydajnego poszukiwania wszystkich liczb pi
   - [Sprawdzenie poprawności działania](#sprawdzenie-poprawności-działania)
   - [Zadania](#zadania)
     - [Zadanie 1](#zadanie-1)
+    - [Zadanie 2](#zadanie-2)
+      - [Wykonanie sekwencyjne](#wykonanie-sekwencyjne)
+      - [Wykonanie równoległe](#wykonanie-równoległe)
   - [Przydatne materiały](#przydatne-materiały)
 
 ## Działanie programu
@@ -60,6 +63,33 @@ Proszę zrówoleglić wykonanie programu z wykorzystaniem OpenMP (na początku z
 
 Kod programu znajduje się w pliku [main.c](./main.c).
 Opis algorytmu oraz sekcji krytycznych znajduje się w akapicie [Działanie programu](#Działanie-programu).
+
+### Zadanie 2
+
+Proszę obliczyć czas wykonania programu sekwencyjnego i zrównoleglonengo (dla l. wątków 2-8) dla rozmiaru zadania n=10⁵, n=10⁶, n=10⁷.
+
+Pomiary zostały przeprowadzone na 4 rdzeniowym procesorze.
+
+#### Wykonanie sekwencyjne
+
+| n   | czas \[µs\] |
+| --- | ----------- |
+| 10⁵ | 7988        |
+| 10⁶ | 127219      |
+| 10⁷ | 2529676     |
+
+#### Wykonanie równoległe
+
+Czas wykonania jest przedstawiony w µs.
+
+| n \\ threads | 2      | 3      | 4      | 5      | 6      | 7      | 8      |
+| ------------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
+| 10⁵          | 4126   | 4182   | 5376   | 5504   | 6449   | 6975   | 6213   |
+| 10⁶          | 37487  | 34090  | 31521  | 33520  | 35476  | 46280  | 49261  |
+| 10⁷          | 495117 | 367541 | 320260 | 317706 | 302994 | 311747 | 331973 |
+
+Z pomiarów jasno wynika, że dla tego problemu warto zastosować algorytm równoległy.
+Co ciekawe czas wykonania nie jest najkrótszy dla 8 wątków. Może to wynikać z 4 rdzeniowej architektury testowanego procesora.
 
 ## Przydatne materiały
 
