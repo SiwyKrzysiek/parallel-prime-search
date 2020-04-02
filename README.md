@@ -24,6 +24,19 @@ Do sprawdzenia pierwszości kolejnych liczb zastosowana jest równoległa pętla
 Dla zwiększenia wydajności pętla nie jest typu `ordered` co powoduje, że wyniki **nie są posortowane**.  
 Bariera na końcu pętli for została usunięta, ponieważ nie ma potrzeby, żeby wątki czekały na siebie.
 
+## Uruchomienie programu
+
+Do kompilacji programu wymagana jest biblioteka _openmp_. Program był testowany na systemie OS X.
+
+Program można zbudować przy pomocy narzędzia makefile pleceniem `make`.
+
+Po zbudowaniu program można uruchomić poleceniem `./findPrimes range_boundary`.  
+Gdzie _range\_boundary_ jest największą liczbą, która zostanie uwzględniona w algorytmie (n).
+
+## Sprawdzenie poprawności działania
+
+Do sprawdzenia poprawności wyników został napisany prosty skrypt `testPrimes.py`. Zakłada on, że wynik głównego programu został zapisany w pliku.
+
 ## Przydatne materiały
 
 - [Jak kompilować programy z OpenMP na OS X](https://iscinumpy.gitlab.io/post/omp-on-high-sierra/)
