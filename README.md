@@ -16,6 +16,9 @@ Wykorzystanie standardu OpenMP w celu wydajnego poszukiwania wszystkich liczb pi
     - [Zadanie 2](#zadanie-2)
       - [Wykonanie sekwencyjne](#wykonanie-sekwencyjne)
       - [Wykonanie równoległe](#wykonanie-równoległe)
+    - [Zadanie 3](#zadanie-3)
+      - [Przyśpieszenie względem programu iteracyjnego](#przyśpieszenie-względem-programu-iteracyjnego)
+      - [Efektywność wykorzystania wątków](#efektywnośćwykorzystania-wątków)
   - [Przydatne materiały](#przydatne-materiały)
 
 ## Działanie programu
@@ -82,14 +85,42 @@ Pomiary zostały przeprowadzone na 4 rdzeniowym procesorze.
 
 Czas wykonania jest przedstawiony w µs.
 
-| n \\ threads | 2      | 3      | 4      | 5      | 6      | 7      | 8      |
-| ------------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
-| 10⁵          | 4126   | 4182   | 5376   | 5504   | 6449   | 6975   | 6213   |
-| 10⁶          | 37487  | 34090  | 31521  | 33520  | 35476  | 46280  | 49261  |
-| 10⁷          | 495117 | 367541 | 320260 | 317706 | 302994 | 311747 | 331973 |
+| n \\ wątki | 2      | 3      | 4      | 5      | 6      | 7      | 8      |
+| ---------- | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
+| 10⁵        | 4126   | 4182   | 5376   | 5504   | 6449   | 6975   | 6213   |
+| 10⁶        | 37487  | 34090  | 31521  | 33520  | 35476  | 46280  | 49261  |
+| 10⁷        | 495117 | 367541 | 320260 | 317706 | 302994 | 311747 | 331973 |
 
 Z pomiarów jasno wynika, że dla tego problemu warto zastosować algorytm równoległy.
 Co ciekawe czas wykonania nie jest najkrótszy dla 8 wątków. Może to wynikać z 4 rdzeniowej architektury testowanego procesora.
+
+### Zadanie 3
+
+Dla zrównoleglonego programu dla rozmiaru zadania n=10⁵, n=10⁶, n=10⁷ (dla l. wątków 2-8) proszę obliczyć przyspieszenie programu i jego efektywność (E(p,n) = S(p,n)/p).
+
+#### Przyśpieszenie względem programu iteracyjnego
+
+Przyśpieszenie jest liczone jako stosunek czasu wykonania sekwencyjnego do czasu wykonania równoległego.
+
+| n \\ wątki | 2    | 3    | 4    | 5    | 6    | 7    | 8    |
+| ---------- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
+| 10⁵        | 194% | 191% | 149% | 145% | 124% | 115% | 129% |
+| 10⁶        | 339% | 373% | 404% | 380% | 359% | 275% | 258% |
+| 10⁷        | 511% | 688% | 790% | 796% | 835% | 811% | 762% |
+
+Przyśpieszenie pozwala określić jaką liczbę wątków należy przeznaczyć by otrzymać wynik w możliwie krótkim czasie.
+
+#### Efektywność wykorzystania wątków
+
+Efektywność jest liczona jako stosunek przyśpieszenia do liczby wątków.
+
+| n \\ wątki | 2    | 3    | 4    | 5    | 6    | 7    | 8   |
+| ---------- | ---- | ---- | ---- | ---- | ---- | ---- | --- |
+| 10⁵        | 97%  | 64%  | 37%  | 29%  | 21%  | 16%  | 16% |
+| 10⁶        | 170% | 124% | 101% | 76%  | 60%  | 39%  | 32% |
+| 10⁷        | 255% | 229% | 197% | 159% | 139% | 116% | 95% |
+
+Efektywność pozwala określić jaką liczbę wątków należy przydzielić by uzyskać optymalne wykorzystanie procesora.
 
 ## Przydatne materiały
 
