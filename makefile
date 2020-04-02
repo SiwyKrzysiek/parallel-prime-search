@@ -1,9 +1,9 @@
 ProgramName=findPrimes
 CC=clang
 
-UNAME := $(shell uname)
-# OS X specific configuration
 SharedFlags=-std=c11
+# OS X specific configuration
+UNAME := $(shell uname)
 ifeq ($(UNAME), Darwin)
 	SharedFlags+=-Xpreprocessor -fopenmp -lomp -I"$(shell brew --prefix libomp)/include" -L"$(shell brew --prefix libomp)/lib"
 else
