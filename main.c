@@ -90,7 +90,7 @@ int* eratosthenesSieve(const int lastNumber)
     sieve[0] = false;
 
     int startingPoint = 1;
-    #pragma omp parallel shared(sieve, startingPoint)
+    #pragma omp parallel shared(sieve, starting Point, primes)
     {
         while (startingPoint < n)
         {
@@ -108,8 +108,8 @@ int* eratosthenesSieve(const int lastNumber)
                             myPrime = ++startingPoint;
                             cvector_push_back(primes, myPrime);
 #ifdef DEBUG
-                            // int id = omp_get_thread_num();
-                            // printf("Thread %d found prime: %d\n", id, myPrime);
+                            int id = omp_get_thread_num();
+                            printf("Thread %d found prime: %d\n", id, myPrime);
 #endif
                             break;
                         }
