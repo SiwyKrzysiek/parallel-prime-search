@@ -90,7 +90,7 @@ int* eratosthenesSieve(const int lastNumber)
     sieve[0] = false;
 
     int startingPoint = 1;
-    #pragma omp parallel shared(sieve, starting Point, primes)
+    #pragma omp parallel shared(sieve, startingPoint, primes)
     {
         while (startingPoint < n)
         {
